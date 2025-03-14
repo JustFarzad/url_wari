@@ -108,8 +108,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           if (title.includes(" - ")) {
             const parts = title.split(" - ");
-            artist = parts[0].trim();
-            title = parts.slice(1).join(" - ").trim();
+            // Swap artist and title for correct display
+            title = parts[0].trim();
+            artist = parts.slice(1).join(" - ").trim();
+            
+            // Special case for filenames with additional info after artist
+            if (artist.includes(" (") || artist.includes(" [")) {
+              const artistParts = artist.split(/[ \(|\[]/);
+              artist = artistParts[0].trim();
+            }
           }
           
           // Special cases
@@ -119,6 +126,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           if (filename === "R U Mine_ - Arctic Monkeys.mp3") {
             title = "R U Mine?";
+            artist = "Arctic Monkeys";
+          }
+          
+          if (filename === "Shut up my moms calling.mp3") {
+            artist = "Hotel Ugly";
           }
           
           return {
