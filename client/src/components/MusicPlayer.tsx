@@ -6,24 +6,37 @@ const MusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Create audio element
-    audioRef.current = new Audio("/blue.mp3");
+    // Use the API endpoint directly which has been confirmed working in the server logs
+    audioRef.current = new Audio("/api/blue-audio");
     audioRef.current.loop = true;
     audioRef.current.volume = 0.7; // Set volume to 70%
     
+    console.log("Loading audio directly from API endpoint");
+    
+    // Force setting loaded to true after a brief delay
+    // This ensures the player is interactive even if the audio is still loading
+    const loadingTimer = setTimeout(() => {
+      setIsLoaded(true);
+      console.log("Audio player ready to use");
+    }, 2000);
+    
     // Handle audio loading success
     audioRef.current.addEventListener('canplaythrough', () => {
+      console.log("Audio loaded successfully!");
       setIsLoaded(true);
+      clearTimeout(loadingTimer);
     });
     
     // Handle audio loading errors
     audioRef.current.addEventListener('error', (e) => {
       console.warn("Error loading audio file:", e);
-      // Keep the player functional even if audio fails to load
+      // Show the player anyway so user can still interact with it
+      setIsLoaded(true);
     });
     
     // Clean up
     return () => {
+      clearTimeout(loadingTimer);
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;

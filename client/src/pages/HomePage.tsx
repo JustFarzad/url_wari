@@ -76,10 +76,20 @@ const HomePage = () => {
               <button 
                 className="inline-block mt-4 text-[#66C7F4]"
                 onClick={() => {
-                  // This would normally control the music player
-                  const musicPlayer = document.getElementById('music-player');
-                  if (musicPlayer) {
-                    // Toggle player visibility or play/pause
+                  // Find the audio element and play/pause it
+                  const musicButton = document.querySelector('#music-player button');
+                  if (musicButton) {
+                    // Programmatically click the music player button
+                    (musicButton as HTMLButtonElement).click();
+                    
+                    // Scroll to the music player to highlight it
+                    const musicPlayer = document.getElementById('music-player');
+                    if (musicPlayer) {
+                      musicPlayer.classList.add('animate-bounce');
+                      setTimeout(() => {
+                        musicPlayer?.classList.remove('animate-bounce');
+                      }, 1000);
+                    }
                   }
                 }}
               >

@@ -18,7 +18,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.json({ status: "ok", message: "For Warisha" });
   });
 
-  // Serve the audio file
+  // Serve the audio file with multiple paths for redundancy
   app.get("/blue.mp3", (_req, res) => {
     const filePath = path.join(__dirname, "..", "client", "public", "blue.mp3");
     
@@ -27,6 +27,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.setHeader("Content-Type", "audio/mpeg");
       fs.createReadStream(filePath).pipe(res);
     } else {
+      res.status(404).send("Audio file not found");
+    }
+  });
+  
+  // Alternative endpoint for audio
+  app.get("/api/blue-audio", (_req, res) => {
+    const filePath = path.join(__dirname, "..", "client", "public", "blue.mp3");
+    
+    // Check if file exists
+    if (fs.existsSync(filePath)) {
+      console.log("Serving audio file from:", filePath);
+      res.setHeader("Content-Type", "audio/mpeg");
+      fs.createReadStream(filePath).pipe(res);
+    } else {
+      console.error("Audio file not found at path:", filePath);
       res.status(404).send("Audio file not found");
     }
   });
