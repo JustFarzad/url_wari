@@ -39,7 +39,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     // Check if file exists
     if (fs.existsSync(filePath)) {
       console.log("Serving audio file from:", filePath);
+      
+      // Set appropriate headers for media streaming
       res.setHeader("Content-Type", "audio/mpeg");
+      res.setHeader("Accept-Ranges", "bytes");
+      res.setHeader("Cache-Control", "public, max-age=3600");
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      
+      // Get file stats to set content length
+      const stat = fs.statSync(filePath);
+      const fileSize = stat.size;
+      const range = req.headers.range;
+      
+      // Simpler approach: just send the whole file regardless of range
+      res.setHeader("Content-Length", fileSize);
       fs.createReadStream(filePath).pipe(res);
     } else {
       console.error("Audio file not found at path:", filePath);
@@ -90,6 +103,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     res.setHeader("Content-Type", "image/svg+xml");
     res.send(svg);
+  });
+  
+  // Direct route to serve files from attached_assets (as a fallback)
+  app.use('/attached_assets', (req, res, next) => {
+    const filePath = path.join(__dirname, "..", "attached_assets", req.path);
+    
+    // Check if file exists
+    if (fs.existsSync(filePath)) {
+      console.log("Serving asset file from:", filePath);
+      
+      // Set appropriate content type based on extension
+      if (filePath.endsWith('.mp3')) {
+        res.setHeader("Content-Type", "audio/mpeg");
+      } else if (filePath.endsWith('.jpg') || filePath.endsWith('.jpeg')) {
+        res.setHeader("Content-Type", "image/jpeg");
+      } else if (filePath.endsWith('.png')) {
+        res.setHeader("Content-Type", "image/png");
+      }
+      
+      // CORS and caching headers
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.setHeader("Cache-Control", "public, max-age=3600");
+      
+      // Send the file
+      res.sendFile(filePath);
+    } else {
+      next();
+    }
   });
 
   const httpServer = createServer(app);
