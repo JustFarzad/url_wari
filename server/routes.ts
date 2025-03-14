@@ -31,9 +31,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
   
-  // Alternative endpoint for audio
-  app.get("/api/blue-audio", (_req, res) => {
-    const filePath = path.join(__dirname, "..", "client", "public", "blue.mp3");
+  // Serve all audio files from the attached_assets directory
+  app.get("/api/audio/:filename", (req, res) => {
+    const filename = req.params.filename;
+    const filePath = path.join(__dirname, "..", "attached_assets", filename);
     
     // Check if file exists
     if (fs.existsSync(filePath)) {
@@ -44,6 +45,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Audio file not found at path:", filePath);
       res.status(404).send("Audio file not found");
     }
+  });
+  
+  // Get list of available audio files
+  app.get("/api/audio-files", (_req, res) => {
+    const directoryPath = path.join(__dirname, "..", "attached_assets");
+    
+    fs.readdir(directoryPath, (err, files) => {
+      if (err) {
+        console.error("Error reading audio directory:", err);
+        return res.status(500).send("Error reading audio directory");
+      }
+      
+      // Filter only mp3 files
+      const audioFiles = files.filter(file => file.endsWith('.mp3'));
+      
+      res.json({
+        audioFiles: audioFiles.map(filename => ({
+          filename,
+          title: filename.replace('.mp3', ''),
+          url: `/api/audio/${encodeURIComponent(filename)}`
+        }))
+      });
+    });
   });
 
   // Create a placeholder image SVG endpoint

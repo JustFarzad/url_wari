@@ -76,24 +76,37 @@ const HomePage = () => {
               <button 
                 className="inline-block mt-4 text-[#66C7F4]"
                 onClick={() => {
-                  // Find the audio element and play/pause it
-                  const musicButton = document.querySelector('#music-player button');
-                  if (musicButton) {
-                    // Programmatically click the music player button
-                    (musicButton as HTMLButtonElement).click();
+                  // Find the music player controls
+                  const musicPlayer = document.getElementById('music-player');
+                  
+                  if (musicPlayer) {
+                    // Toggle expand state if not already expanded
+                    const expandButton = musicPlayer.querySelector('button:first-child');
+                    const isExpanded = musicPlayer.className.includes('rounded-xl');
                     
-                    // Scroll to the music player to highlight it
-                    const musicPlayer = document.getElementById('music-player');
-                    if (musicPlayer) {
-                      musicPlayer.classList.add('animate-bounce');
-                      setTimeout(() => {
-                        musicPlayer?.classList.remove('animate-bounce');
-                      }, 1000);
+                    if (!isExpanded && expandButton) {
+                      (expandButton as HTMLButtonElement).click();
                     }
+                    
+                    // Play the music
+                    const playButton = Array.from(musicPlayer.querySelectorAll('button')).find(
+                      btn => btn.getAttribute('aria-label')?.includes('Play music') || 
+                            btn.getAttribute('aria-label')?.includes('Pause music')
+                    );
+                    
+                    if (playButton) {
+                      (playButton as HTMLButtonElement).click();
+                    }
+                    
+                    // Highlight the player with animation
+                    musicPlayer.classList.add('animate-bounce');
+                    setTimeout(() => {
+                      musicPlayer?.classList.remove('animate-bounce');
+                    }, 1000);
                   }
                 }}
               >
-                Play Music →
+                Explore Our Playlist →
               </button>
             </div>
           </div>
