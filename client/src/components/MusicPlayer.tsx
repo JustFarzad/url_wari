@@ -9,6 +9,12 @@ const MusicPlayer = () => {
     audioRef.current = new Audio("/blue.mp3");
     audioRef.current.loop = true;
     
+    // Handle audio loading errors
+    audioRef.current.addEventListener('error', (e) => {
+      console.warn("Error loading audio file:", e);
+      // Keep the player functional even if audio fails to load
+    });
+    
     // Clean up
     return () => {
       if (audioRef.current) {

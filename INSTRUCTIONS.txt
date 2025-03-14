@@ -11,3 +11,40 @@ First, download the project files to your computer.
 
 ### Step 2: Install Dependencies
 Open a terminal/command prompt, navigate to the project directory, and run:
+```
+npm install
+```
+
+### Step 3: Add the Music File
+1. Download the song "blue" by Yung Kai
+2. Rename the file to "blue.mp3"
+3. Place the file in the `client/public` directory
+
+### Step 4: Start the Development Server
+Run the following command to start the development server:
+```
+npm run dev
+```
+
+### Step 5: Access the Website
+Open your web browser and go to:
+```
+http://localhost:5000
+```
+
+## Features
+- **Homepage**: Introduction and welcome message
+- **Gallery**: Collection of 20 portrait images (you can add your own photos)
+- **Memories**: Timeline of special moments with the ability to add new memories
+- **Music Player**: Background music player with play/pause controls
+
+## Notes
+- Double-click on gallery images to view them in full size
+- Images enlarge slightly when you hover over them
+- The music player is located at the bottom right of the screen
+- The website is fully responsive and works on mobile devices
+
+## Customization
+- You can edit the text and content in the source files
+- Add your own images to the gallery by replacing the placeholders
+- Customize the styling by modifying the CSS variables in theme.json

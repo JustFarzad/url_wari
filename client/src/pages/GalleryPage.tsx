@@ -1,10 +1,10 @@
 import { useRef } from "react";
 
-// Placeholder gallery items - these will be replaced with real images
+// Gallery items - exactly 20 portrait placeholders
 const galleryItems = Array(20).fill(null).map((_, index) => ({
   id: index + 1,
-  title: `Photo ${index + 1}`,
-  src: "",
+  title: `Portrait ${index + 1}`,
+  src: "", // Will be replaced with user's images
 }));
 
 interface GalleryPageProps {
@@ -60,6 +60,7 @@ const GalleryPage = ({ onImageClick }: GalleryPageProps) => {
                   title: item.title
                 });
               }}
+              title="Double-click to view full size"
             >
               {item.src ? (
                 <img 
