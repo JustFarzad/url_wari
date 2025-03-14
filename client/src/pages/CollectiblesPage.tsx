@@ -15,8 +15,8 @@ const CollectiblesPage = () => {
   const featuredCollectibles = [
     {
       id: 1,
-      name: "Batman Chain",
-      description: "Stylish Batman logo chain necklace",
+      name: "Batman Keychain",
+      description: "Batman logo keychain",
       category: "Accessories",
       imageSrc: "/images/batman chain.jpg"
     },
@@ -30,28 +30,28 @@ const CollectiblesPage = () => {
     {
       id: 3,
       name: "Fazbear Keychain",
-      description: "Five Nights at Freddy's Fazbear collectible keychain",
+      description: "Her keychain",
       category: "Keychains",
       imageSrc: "/images/faz bear.jpg"
     },
     {
       id: 4,
       name: "Brookhaven Characters",
-      description: "Digital collectible from the Brookhaven game",
+      description: "Brookheaven matching avatars",
       category: "Gaming",
       imageSrc: "/images/brookheaven.jpg"
     },
     {
       id: 5,
       name: "W Ring",
-      description: "Stylish W letter ring in dark gray",
+      description: "W ring",
       category: "Accessories",
       imageSrc: "/images/ring.jpg"
     },
     {
       id: 6,
-      name: "MHA Collectible",
-      description: "My Hero Academia collectible item",
+      name: "MHA",
+      description: "My Hero Academia avatars",
       category: "Digital Media",
       imageSrc: "/images/mha.jpg"
     },
@@ -65,7 +65,7 @@ const CollectiblesPage = () => {
     {
       id: 8,
       name: "Warisha Wallet",
-      description: "Custom Warisha wallet",
+      description: "Warisha wallet",
       category: "Accessories",
       imageSrc: "/images/wallet.jpg"
     }

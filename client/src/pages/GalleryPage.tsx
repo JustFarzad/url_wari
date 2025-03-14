@@ -65,23 +65,23 @@ const galleryItems = [
   // Add empty slots to complete the grid
   {
     id: 13,
-    title: "Add New Photo",
-    src: "",
+    title: "hairtie",
+    src: "https://i.imgur.com/ZvRhfBa.jpg",
   },
   {
     id: 14,
-    title: "Add New Photo",
-    src: "",
+    title: "Faz Keychain",
+    src: "https://i.imgur.com/zko8JNu.jpg",
   },
   {
     id: 15,
-    title: "Add New Photo",
-    src: "",
+    title: "Batman Keychain",
+    src: "https://i.imgur.com/QjowNUl.jpg",
   },
   {
     id: 16,
-    title: "Add New Photo",
-    src: "",
+    title: "Her in my wallet",
+    src: "https://i.imgur.com/alQU5qU.jpg",
   },
 ];
 
