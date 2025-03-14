@@ -52,25 +52,6 @@ const MusicPlayer = () => {
     };
   }, []);
 
-  // Parse song name to get artist and title
-  const parseSongName = (filename: string): { artist: string; title: string } => {
-    // Try to extract artist and title based on the common format "Artist - Title.mp3"
-    const parts = filename.replace('.mp3', '').split(' - ');
-    
-    if (parts.length >= 2) {
-      return {
-        artist: parts[0].trim(),
-        title: parts.slice(1).join(' - ').trim()
-      };
-    }
-    
-    // Fallback if no dash is found
-    return {
-      artist: "Unknown Artist",
-      title: filename.replace('.mp3', '')
-    };
-  };
-
   // Fetch the list of available songs
   useEffect(() => {
     fetch('/api/audio-files')
@@ -85,14 +66,8 @@ const MusicPlayer = () => {
           throw new Error('Expected audioFiles array in response');
         }
         
-        const songs = data.audioFiles.map((song: any) => {
-          const { artist, title } = parseSongName(song.filename);
-          return {
-            ...song,
-            artist,
-            title
-          };
-        });
+        // Songs now have artist and title from the server
+        const songs = data.audioFiles as Song[];
         
         console.log("Available songs:", songs);
         setSongList(songs);

@@ -70,15 +70,64 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(500).send("Error reading audio directory");
       }
       
-      // Filter only mp3 files
-      const audioFiles = files.filter(file => file.endsWith('.mp3'));
+      // Filter only the specific mp3 files we want and ensure they're not empty files
+      const allowedSongs = [
+        "Lovers Rock - TV Girl.mp3",
+        "yung kai - blue (official music video) - yung kai.mp3",
+        "Disco - Surf Curse.mp3",
+        "east side - Lyn Lapid.mp3",
+        "Flaming Hot Cheetos - Clairo.mp3",
+        "Heavy - The Marías.mp3",
+        "Meddle About - Chase Atlantic.mp3",
+        "No One Noticed - The Marías.mp3",
+        "R U Mine_ - Arctic Monkeys.mp3",
+        "Shut up my moms calling.mp3",
+        "SpotiDownloader.com - Louise - TV Girl.mp3",
+        "Why'd You Only Call Me When You're High.mp3"
+      ];
+      
+      const filteredFiles = files.filter(file => {
+        // Check if file is in allowed list
+        if (!allowedSongs.includes(file)) return false;
+        
+        // Check if file is not empty
+        try {
+          const stats = fs.statSync(path.join(directoryPath, file));
+          return stats.size > 0;
+        } catch (error) {
+          console.error(`Error checking file size for ${file}:`, error);
+          return false;
+        }
+      });
       
       res.json({
-        audioFiles: audioFiles.map(filename => ({
-          filename,
-          title: filename.replace('.mp3', ''),
-          url: `/api/audio/${encodeURIComponent(filename)}`
-        }))
+        audioFiles: filteredFiles.map(filename => {
+          // Parse the filename to get a cleaner title and artist
+          let title = filename.replace('.mp3', '');
+          let artist = "Unknown Artist";
+          
+          if (title.includes(" - ")) {
+            const parts = title.split(" - ");
+            artist = parts[0].trim();
+            title = parts.slice(1).join(" - ").trim();
+          }
+          
+          // Special cases
+          if (filename.includes("SpotiDownloader.com")) {
+            title = title.replace("SpotiDownloader.com - ", "");
+          }
+          
+          if (filename === "R U Mine_ - Arctic Monkeys.mp3") {
+            title = "R U Mine?";
+          }
+          
+          return {
+            filename,
+            title,
+            artist,
+            url: `/api/audio/${encodeURIComponent(filename)}`
+          };
+        })
       });
     });
   });
