@@ -1,0 +1,13 @@
+# Warisha's Personal Website - Setup Instructions
+
+## Prerequisites
+- Node.js (v14 or higher)
+- npm (Node Package Manager)
+
+## How to Run the Website Locally
+
+### Step 1: Clone or Download the Project
+First, download the project files to your computer.
+
+### Step 2: Install Dependencies
+Open a terminal/command prompt, navigate to the project directory, and run:
