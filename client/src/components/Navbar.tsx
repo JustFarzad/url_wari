@@ -40,10 +40,10 @@ const Navbar = () => {
             Gallery
           </Link>
           <Link 
-            href="/memories" 
-            className={`text-darkgray hover:text-primary transition-all ${isActive("/memories") ? "text-primary" : ""}`}
+            href="/collectibles" 
+            className={`text-darkgray hover:text-primary transition-all ${isActive("/collectibles") ? "text-primary" : ""}`}
           >
-            Memories
+            Collectibles
           </Link>
         </div>
         <button 

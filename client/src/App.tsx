@@ -4,7 +4,7 @@ import MusicPlayer from "@/components/MusicPlayer";
 import Navbar from "@/components/Navbar";
 import HomePage from "@/pages/HomePage";
 import GalleryPage from "@/pages/GalleryPage";
-import MemoriesPage from "@/pages/MemoriesPage";
+import CollectiblesPage from "@/pages/CollectiblesPage";
 import NotFound from "@/pages/not-found";
 import { useState } from "react";
 import ImageModal from "./components/ImageModal";
@@ -34,7 +34,7 @@ function App() {
         <Route path="/gallery">
           <GalleryPage onImageClick={openModal} />
         </Route>
-        <Route path="/memories" component={MemoriesPage} />
+        <Route path="/collectibles" component={CollectiblesPage} />
         <Route component={NotFound} />
       </Switch>
       <MusicPlayer />
