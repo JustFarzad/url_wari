@@ -15,39 +15,60 @@ const CollectiblesPage = () => {
   const featuredCollectibles = [
     {
       id: 1,
-      name: "Batman LEGO Keychain",
-      description: "LEGO Batman figure keychain with detailed costume",
-      category: "Keychains",
-      imageSrc: "/placeholder-image.svg"
+      name: "Batman Chain",
+      description: "Stylish Batman logo chain necklace",
+      category: "Accessories",
+      imageSrc: "/images/batman chain.jpg"
     },
     {
       id: 2,
       name: "Spider-Man Bracelet",
-      description: "Red and black braided bracelet with Spider-Man logo",
+      description: "Miles Morales Spider-Man themed bracelet",
       category: "Bracelets",
-      imageSrc: "/placeholder-image.svg"
+      imageSrc: "/images/miles bracelet.jpg"
     },
     {
       id: 3,
-      name: "Starbucks Bear Charm",
-      description: "Starbucks bear barista collectible charm",
+      name: "Fazbear Keychain",
+      description: "Five Nights at Freddy's Fazbear collectible keychain",
       category: "Keychains",
-      imageSrc: "/placeholder-image.svg"
+      imageSrc: "/images/faz bear.jpg"
     },
     {
       id: 4,
       name: "Brookhaven Characters",
       description: "Digital collectible from the Brookhaven game",
       category: "Gaming",
-      imageSrc: "/placeholder-image.svg"
+      imageSrc: "/images/brookheaven.jpg"
     },
     {
       id: 5,
       name: "W Ring",
       description: "Stylish W letter ring in dark gray",
       category: "Accessories",
-      imageSrc: "/placeholder-image.svg"
+      imageSrc: "/images/ring.jpg"
     },
+    {
+      id: 6,
+      name: "MHA Collectible",
+      description: "My Hero Academia collectible item",
+      category: "Digital Media",
+      imageSrc: "/images/mha.jpg"
+    },
+    {
+      id: 7,
+      name: "Matching Bracelets",
+      description: "Spider-Man themed matching bracelets set",
+      category: "Bracelets", 
+      imageSrc: "/images/spidermatching.jpg"
+    },
+    {
+      id: 8,
+      name: "Warisha Wallet",
+      description: "Custom Warisha wallet",
+      category: "Accessories",
+      imageSrc: "/images/wallet.jpg"
+    }
   ];
 
   return (
@@ -78,10 +99,12 @@ const CollectiblesPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredCollectibles.map((item) => (
               <div key={item.id} className="bg-white rounded-lg shadow-md overflow-hidden hover-grow">
-                <div className="h-48 bg-gray-100">
-                  <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                    <i className="ri-image-line text-4xl text-gray-400"></i>
-                  </div>
+                <div className="h-48 bg-gray-100 overflow-hidden">
+                  <img 
+                    src={item.imageSrc} 
+                    alt={item.name} 
+                    className="w-full h-full object-cover transition-all duration-300 hover:scale-110"
+                  />
                 </div>
                 <div className="p-4">
                   <h3 className="text-lg font-medium mb-1">{item.name}</h3>

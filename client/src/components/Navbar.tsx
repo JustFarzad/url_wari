@@ -74,11 +74,11 @@ const Navbar = () => {
               Gallery
             </Link>
             <Link 
-              href="/memories" 
-              className={`py-2 hover:text-primary transition-all ${isActive("/memories") ? "text-primary" : "text-darkgray"}`}
+              href="/collectibles" 
+              className={`py-2 hover:text-primary transition-all ${isActive("/collectibles") ? "text-primary" : "text-darkgray"}`}
               onClick={closeMobileMenu}
             >
-              Memories
+              Collectibles
             </Link>
           </div>
         </div>

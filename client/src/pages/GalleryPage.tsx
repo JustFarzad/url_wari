@@ -1,11 +1,89 @@
 import { useRef } from "react";
 
-// Gallery items - exactly 20 portrait placeholders
-const galleryItems = Array(20).fill(null).map((_, index) => ({
-  id: index + 1,
-  title: `Portrait ${index + 1}`,
-  src: "", // Will be replaced with user's images
-}));
+// Gallery items with real images
+const galleryItems = [
+  {
+    id: 1,
+    title: "Roses",
+    src: "/images/THE roses.jpg",
+  },
+  {
+    id: 2,
+    title: "Lock Screen",
+    src: "/images/lockscreen.jpg",
+  },
+  {
+    id: 3,
+    title: "Notes",
+    src: "/images/notes.jpg",
+  },
+  {
+    id: 4,
+    title: "Miles Bracelet",
+    src: "/images/miles bracelet.jpg",
+  },
+  {
+    id: 5,
+    title: "Her Bracelet",
+    src: "/images/HER bracelet.jpg",
+  },
+  {
+    id: 6,
+    title: "Warisha",
+    src: "/images/wari.jpg",
+  },
+  {
+    id: 7,
+    title: "Warisha Portrait",
+    src: "/images/wari2.jpg",
+  },
+  {
+    id: 8,
+    title: "Before November Ends",
+    src: "/images/before november ends.jpg",
+  },
+  {
+    id: 9,
+    title: "W Ring",
+    src: "/images/ring.jpg",
+  },
+  {
+    id: 10,
+    title: "Matching Spider Bracelets",
+    src: "/images/spidermatching.jpg",
+  },
+  {
+    id: 11,
+    title: "My Hero Academia",
+    src: "/images/mha.jpg",
+  },
+  {
+    id: 12,
+    title: "Brookhaven",
+    src: "/images/brookheaven.jpg",
+  },
+  // Add empty slots to complete the grid
+  {
+    id: 13,
+    title: "Add New Photo",
+    src: "",
+  },
+  {
+    id: 14,
+    title: "Add New Photo",
+    src: "",
+  },
+  {
+    id: 15,
+    title: "Add New Photo",
+    src: "",
+  },
+  {
+    id: 16,
+    title: "Add New Photo",
+    src: "",
+  },
+];
 
 interface GalleryPageProps {
   onImageClick: (image: { src: string; title: string }) => void;
